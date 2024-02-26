@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<html lang="en" dir="ltr">
+
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+
+<link rel="stylesheet" href="style.css">
+<script src="canvas.js"></script>
+
+<a href="https://www.flaticon.com/free-icons/silo" title="silo icons"></a>
+
+</head>
+
+<body>
+
+<img src="farmhouse.png" id="farmhouse" width="0" height="0">
+
+<div>
+<canvas id="myCanvas" width="1300" height="550" style="background-color: black; border:1px solid grey"></canvas>
+</div>
+
+<script>
+    
+    const myCanvas = document.getElementById("myCanvas");
+                                                        
+    const ctx2 = myCanvas.getContext("2d"); //Created a canvas with a black background color//
+
+
+    ctx2.fillStyle = "lightblue"; //Created a circle. Half of the circle is a lightblue color and the other half is lightgreen//
+    ctx2.beginPath();
+    ctx2.arc(650, 300, 250, 0, 2 * Math.PI);
+    ctx2.fill();
+
+    ctx2.fillStyle="lightgreen";
+    ctx2.beginPath();
+    ctx2.arc(650, 300, 250, 0, Math.PI, false);
+    ctx2.fill();
+ 
+
+
+    var image = new Image(); //Created a image function to display a farmhouse within the canvas//
+    image.src = 'farmhouse.png';
+    image.onload = function () {
+        const ctx2 = myCanvas.getContext("2d");
+        var wrh = 50 / 80;
+        var newWidth = 40;
+        var newHeight = 30/ wrh;
+        if (newHeight > myCanvas.height) {
+					newHeight = myCanvas.height;
+        	newWidth = newHeight * wrh;
+      	}
+        var xOffset = newWidth < myCanvas.width ? ((myCanvas.width - newWidth) / 2) : 0;
+        var yOffset = newHeight < myCanvas.height ? ((myCanvas.height - newHeight) / 2) : 0;
+
+        ctx2.drawImage(image, xOffset, yOffset, newWidth, newHeight);
+      };
+    
+
+        var x=730,y=510;
+
+    for (var i = 0; i < 10; i++) {  //Created three for loops for the creation of the raked soil//
+
+            ctx2.strokeStyle = 'green';
+            ctx2.moveTo(650,300);
+            ctx2.lineTo(x,y);
+            ctx2.stroke();
+            x = x + 10;
+    
+        
+    
+    }
+    
+        var x=630,y=510;
+
+    for (var i = 0; i < 10; i++) {
+    
+                ctx2.strokeStyle = 'green';
+                ctx2.moveTo(650,300);
+                ctx2.lineTo(x,y);
+                ctx2.stroke();
+                x = x + 10;
+        
+            
+        
+        }
+
+     var x=530,y=510;
+
+     for (var i = 0; i < 10; i++) {
+    
+                ctx2.strokeStyle = 'green';
+                ctx2.moveTo(650,300);
+                ctx2.lineTo(x,y);
+                ctx2.stroke();
+                x = x + 10;
+        
+            
+        
+        }
+    
+        
+        ctx2.font = "20px Comic Sans MS"; //Created the title of the canvas//
+        ctx2.fillStyle = "white";
+        ctx2.textAlign = "right";
+        ctx2.fillText("The Optometrist", 1200, 500);
+        ctx2.addEventListener("click", function(e) {
+        window.open("https://www.google.com");
+        });
+
+        </script>
+
+</body>
+
+
+
+    
+
+
+
+
+
+
+</html>
