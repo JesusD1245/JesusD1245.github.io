@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weight Calculator</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-image: url('Galaxy.jpg'); /* Added a background image */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: white;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .welcome-text {
+      text-align: center;
+      padding-top: 100px;
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-weight: 900;
+    }
+
+    .container {
+      font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      font-weight: 900;
+      width:40%;
+    }
+
+ 
+
+  </style>
+</head>
+<body>
+
+<div class="welcome-text">
+  <h1>Welcome!</h1>
+  <p>This is the Weight Calculator</p>
+  <p>Explore your weight on different planets!</p>
+  <p>Scroll down to start!</p>
+</div>
+
+<div class="container">
+  <h2>Weight Calculator</h2>
+  <form id="weightForm">
+    <div class="form-group">
+      <label for="weight">Weight (in lbs):</label>
+      <input type="number" class="form-control" id="weight" placeholder="Enter weight" required>
+    </div>
+    <div class="form-group">
+      <label for="planet">Select a planet:</label>
+      <select class="form-control" id="planet" required>
+        <option value="0">-- Select Planet --</option>
+        <option value="0.38">Mercury</option>
+        <option value="0.91">Venus</option>
+        <option value="0.38">Mars</option>
+        <option value="2.34">Jupiter</option>
+        <option value="1.06">Saturn</option>
+        <option value="0.92">Uranus</option>
+        <option value="1.19">Neptune</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-info">Calculate</button>
+    <button type="button" class="btn btn-danger" onclick="resetForm()">Reset</button>
+  </form>
+  <div id="result" class="mt-4"></div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+  // Remember form data
+  $(document).ready(function() {
+    if(localStorage.getItem('weight')) {
+      $('#weight').val(localStorage.getItem('weight'));
+    }
+    if(localStorage.getItem('planet')) {
+      $('#planet').val(localStorage.getItem('planet'));
+    }
+  });
+
+  // Calculate weight
+  $('#weightForm').submit(function(event) {
+    event.preventDefault();
+    var weight = $('#weight').val();
+    var planet = $('#planet').val();
+
+    if(weight && planet) {
+      var calculatedWeight = weight / 2.20462 * planet; // Convert lbs to kg and then calculate
+      $('#result').html('<h4>Your weight on this planet is: ' + calculatedWeight.toFixed(2) + ' lbs</h4>');
+
+      // Save form data to localStorage
+      localStorage.setItem('weight', weight);
+      localStorage.setItem('planet', planet);
+    } else {
+      $('#result').html('<div class="alert alert-danger" role="alert">Please fill out all fields</div>');
+    }
+  });
+
+  // Reset form and localStorage
+  function resetForm() {
+    $('#weightForm')[0].reset();
+    $('#result').html('');
+    localStorage.removeItem('weight');
+    localStorage.removeItem('planet');
+  }
+</script>
+
+</body>
+</html>
