@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fruit Bar Chart</title>
+  
+</head>
+<body>
+  <canvas id="barChart" width="650" height="650"></canvas> 
+
+  <style>
+    body { 
+      height: 100%;
+      width: 100%;
+    }
+    canvas { /*Made the canvas have a window fit using CSS, meaning it will auto resize*/
+     
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      
+    }
+
+    </style>
+    <body>
+
+  <script>
+    
+    const fruit = [ //Created JSON Array with fruit names and quantity//
+      { fruit: 'Apple', quantity: 20 },
+      { fruit: 'Orange', quantity: 10 },
+      { fruit: 'Banana', quantity: 15 },
+      { fruit: 'Kiwi', quantity: 5 },
+      { fruit: 'Blueberry', quantity: 5 },
+      { fruit: 'Grapes', quantity: 10 }
+    ];
+
+    
+    const canvas = document.getElementById('barChart');
+    const ctx = canvas.getContext('2d');
+
+
+   
+    const chartWidth = canvas.width - 80; //Created bar chart dimensions//
+    const chartHeight = canvas.height - 80;
+    const barSpacing = 0;
+
+    
+    const fruitColors = { //Created const for fruit colors//
+      'Apple': 'red',
+      'Orange': 'orange',
+      'Banana': 'yellow',
+      'Kiwi': 'green',
+      'Blueberry': 'blue',
+      'Grapes': 'purple'
+    };
+
+    
+    function drawBarChart() { //Created function to draw actual bar chart//
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      
+      const maxQuantity = Math.max(...fruit.map(item => item.quantity));
+
+      
+      const barWidth = (chartWidth - (fruit.length - 1) * barSpacing) / fruit.length;
+
+      
+      fruit.forEach((item, index) => { //Coordinate each individual bar, in this case vertically//
+        const y = index * (barWidth + barSpacing) + 20; //x and y coordinates were altered to position bars vertically// 
+        const x = 20;
+        const width = (item.quantity / maxQuantity) * chartWidth;
+        const color = fruitColors[item.fruit];
+
+        
+        ctx.fillStyle = color; //Draw out bars//
+        ctx.fillRect(x, y , width, barWidth);
+
+        
+        ctx.fillStyle = 'black'; // Draw the fruit quantity and name labels//
+        ctx.fillText(item.quantity, 25, y + barWidth / 2,);
+        ctx.fillText(item.fruit, 25, y + barWidth /1.5,);
+      });
+    }
+
+    
+    drawBarChart(); //Call draw function, to finalize drawing//
+  </script>
+</body>
+</html>

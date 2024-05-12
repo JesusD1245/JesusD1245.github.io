@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sound Machine</title>
+</head>
+
+<body>
+
+    <style>
+        body {
+            background-color: black;
+        }
+
+        img {
+            /*Made the img centered*/
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+
+    <img src="DJ Controller.jpg" usemap="#image-map">
+
+    <map name="image-map">
+        <area target="" alt="track1" title="track1" href="javascript:toggleMusic(1)" coords="94,239,69,255"
+            shape="rect">
+        <area target="" alt="track2" title="track2" href="javascript:toggleMusic(2)" coords="123,246,142,260"
+            shape="rect">
+        <area target="" alt="track3" title="track3" href="javascript:toggleMusic(3)" coords="399,247,422,261"
+            shape="rect">
+        <area target="" alt="track4" title="track4" href="javascript:toggleMusic(4)" coords="452,245,476,257"
+            shape="rect">
+        <area target="" alt="track5" title="track5" href="javascript:toggleMusic(5)" coords="431,258,451,273"
+            shape="rect">
+    </map>
+
+    <script>
+
+        var audio1 = new Audio('essa-mina.mp3'); //created five audio variables and one null variable//
+        var audio2 = new Audio('bad-bo.mp3');
+        var audio3 = new Audio('black-box-africa.mp3');
+        var audio4 = new Audio('baby-mandala.mp3');
+        var audio5 = new Audio('blast.mp3');
+        var currentAudio = null;
+
+        function toggleMusic(trackNumber) { //created a function that allows the audio to be played and paused//
+            if (currentAudio && !currentAudio.paused) {
+                currentAudio.pause();
+            }
+
+            if (currentAudio === window['audio' + trackNumber]) {
+                currentAudio = null;
+            } else {
+                currentAudio = window['audio' + trackNumber];
+                currentAudio.play();
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
