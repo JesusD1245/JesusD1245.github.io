@@ -1,0 +1,15 @@
+{
+    "name": "Planet-Weight Calculator",
+    "short_name": "Weight Calc",
+    "icons": [
+      {
+        "src": "planets.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }
+    ],
+    "start_url": "/",
+    "background_color": "#000000",
+    "theme_color": "#000000",
+    "display": "standalone"
+  }
